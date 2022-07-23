@@ -9,3 +9,4 @@ class Ticker(models.Model):
     def generate_movement(self):
         movement = -1 if random() < 0.5 else 1
         self.value += movement
+        self.save()
