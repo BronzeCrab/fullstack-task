@@ -1,14 +1,26 @@
-Что сделал:
-===========
+# Что сделал:
 
-Бэкенд: Django, Channels, тикеры создаются в файле миграций 
+##### Бэкенд: 
+
+Django, Channels, тикеры создаются в файле миграций 
 (tickers/migrations), сбрасывать значения тикеров можно
-из админки (action erase_values)
+из админки (action erase_values).
 
-Фронт: Vue, vue-charts
+Тесты лежат в `back/tickers/tests`.
 
-Как запустить:
-==============
+Запустить тесты `python manage.py test`
+
+Какие есть ендпоинты:
+
+`http://localhost:8000/` - эндпоинт для тестирование работы бэкенда
+
+`ws://localhost:8000/ws/` - эндпоинт для передачи данных через WS
+ 
+##### Фронт: 
+
+Vue, vue-charts
+
+# Как запустить:
 
 `cd back`
 
@@ -18,7 +30,7 @@
 
 `python mangage.py runserver`
 
-then
+потом:
 
 `cd front`
 

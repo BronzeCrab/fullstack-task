@@ -8,10 +8,10 @@ from tickers.models import Ticker
 class Consumer(WebsocketConsumer):
     def connect(self):
         self.accept()
+        adict = {}
         while True:
-            alist = []
             for ticker in Ticker.objects.all():
                 ticker.generate_movement()
-                alist.append({'name': ticker.name, 'value': ticker.value})
-            self.send(text_data=json.dumps({'message': alist}))
+                adict[ticker.name] = ticker.value
+            self.send(text_data=json.dumps({'message': adict}))
             time.sleep(1)

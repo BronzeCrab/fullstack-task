@@ -8,7 +8,7 @@
 <body>
   <h1 id='app'>hello</h1>
   <script type="text/javascript">
-    let socket = new WebSocket('ws://localhost:8000/ws/some_url/');
+    let socket = new WebSocket('ws://localhost:8000/ws/');
     socket.onmessage = function(event) {
       let data = JSON.parse(event.data);
       console.log(data);
