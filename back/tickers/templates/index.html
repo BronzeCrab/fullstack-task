@@ -6,13 +6,19 @@
   <title></title>
 </head>
 <body>
-  <h1>hello</h1>
+  <h1>hello, this is tickers:</h1>
   <div id="tickers"></div>
   <script type="text/javascript">
     let socket = new WebSocket('ws://localhost:8000/ws/');
     socket.onmessage = function(event) {
       let data = JSON.parse(event.data);
-      document.querySelector('#tickers').innerText = JSON.stringify(data.message);
+
+      let txt = "";
+      for (let x in data.message) {
+        txt += x + ': ' + data.message[x] + " \n";
+      };
+
+      document.querySelector('#tickers').innerText = txt;
     }
   </script>
 </body>
