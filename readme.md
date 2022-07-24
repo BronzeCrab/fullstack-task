@@ -37,3 +37,7 @@ Vue, vue-charts
 `npm install`
 
 `npm run dev`
+
+потом на:
+
+`http://localhost:5173/`
