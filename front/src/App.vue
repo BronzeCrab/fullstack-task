@@ -23,6 +23,6 @@ export default {
     text-align: center;
   }
   .ticker_drop {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 </style>
