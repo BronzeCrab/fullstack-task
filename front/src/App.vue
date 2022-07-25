@@ -4,17 +4,17 @@
   </header>
   <main>
     <TickerDropdown />
-    <BarChart />
+    <LineChart />
   </main>
 </template>
 
 <script>
-import BarChart from '@/components/BarChart.vue'
+import LineChart from '@/components/LineChart.vue'
 import TickerDropdown from '@/components/TickerDropdown.vue'
 
 export default {
   name: 'App',
-  components: { BarChart, TickerDropdown }
+  components: { LineChart, TickerDropdown }
 }
 </script>
 
