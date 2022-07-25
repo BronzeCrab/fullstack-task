@@ -1,5 +1,5 @@
 <template>
-  <Line :chart-data="datacollection"/>
+  <Line :chart-data="datacollection" class="line-chart"/>
 </template>
 
 <script>
@@ -52,3 +52,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  #ticker-sel {
+    margin-left: 0.5rem;
+  }
+
+  .line-chart {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="ticker_drop">
     <label>Выберете название тикера:</label>
-    <select id=ticker-sel name="ticker-names">
+    <select id=ticker-sel name="ticker-names" @change="handler">
       <option v-for="choice in choices">{{ choice }}</option>
     </select>
   </div>
@@ -13,6 +13,11 @@
     data: () => ({
       'choices': []
     }),
+    methods: {
+      handler(event) {
+        this.$emit('dropChanged', event.target.value)
+      }
+    },
     mounted () {
       fetch('http://localhost:8000/ticker_names/')
         .then(response => response.json())

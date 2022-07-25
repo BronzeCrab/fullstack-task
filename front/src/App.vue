@@ -3,7 +3,7 @@
     <h3>График стоимости тикеров:</h3>
   </header>
   <main>
-    <TickerDropdown />
+    <TickerDropdown @dropChanged="onDropChanged"/>
     <LineChart />
   </main>
 </template>
@@ -14,7 +14,12 @@ import TickerDropdown from '@/components/TickerDropdown.vue'
 
 export default {
   name: 'App',
-  components: { LineChart, TickerDropdown }
+  components: { LineChart, TickerDropdown },
+  methods: {
+    onDropChanged(value) {
+      console.log(value)
+    }
+  }
 }
 </script>
 
