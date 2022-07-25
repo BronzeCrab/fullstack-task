@@ -21,7 +21,7 @@
     mounted () {
       fetch('http://localhost:8000/ticker_names/')
         .then(response => response.json())
-        .then(data => (this.choices = data));
+        .then(data => (this.choices = data))
     }
   }
 </script>

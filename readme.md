@@ -21,7 +21,7 @@ Django, Channels, тикеры создаются в файле миграций
  
 ### Фронт: 
 
-Vue, vue-charts
+Vue3, vue-charts
 
 # Как запустить:
 

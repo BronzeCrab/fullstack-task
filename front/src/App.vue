@@ -16,8 +16,8 @@ export default {
   name: 'App',
   components: { LineChart, TickerDropdown },
   methods: {
-    onDropChanged(value) {
-      console.log(value)
+    onDropChanged(ticker_name) {
+      console.log(ticker_name)
     }
   }
 }
