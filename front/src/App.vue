@@ -20,7 +20,7 @@ export default {
       datasets: [
         {
           data: [],
-          label: "Ticker",
+          label: "ticker_00",
           borderColor: "#3e95cd",
           fill: false
         }
@@ -30,14 +30,20 @@ export default {
   components: { LineChart, TickerDropdown },
   methods: {
     onDropChanged(ticker_name) {
-      console.log(ticker_name)
+      this.graphData.labels = []
+      this.graphData.datasets[0].data = []
+      this.graphData.datasets[0].label = ticker_name
+      this.socket.close()
+      this.get_ticker_value(ticker_name)
     },
     get_ticker_value(ticker_name='ticker_00') {
-      let socket = new WebSocket('ws://localhost:8000/ws/')
+      this.socket = new WebSocket('ws://localhost:8000/ws/')
       let _this = this
-      socket.onmessage = function(event) {
+      this.socket.onmessage = function(event) {
         let data = JSON.parse(event.data)
         _this.graphData.labels.push('test')
+        console.log(ticker_name)
+        console.log(data.message[ticker_name])
         _this.graphData.datasets[0].data.push(data.message[ticker_name])
       }
     }

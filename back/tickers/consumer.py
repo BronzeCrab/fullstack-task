@@ -1,17 +1,23 @@
 import json
-import time
-from channels.generic.websocket import WebsocketConsumer
+from asyncio import sleep
+from channels.generic.websocket import AsyncWebsocketConsumer
+from asgiref.sync import sync_to_async
 
 from tickers.models import Ticker
  
 
-class Consumer(WebsocketConsumer):
-    def connect(self):
-        self.accept()
+@sync_to_async
+def get_all_tickers():
+    return list(Ticker.objects.all())
+
+
+class Consumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        await self.accept()
         adict = {}
         while True:
-            for ticker in Ticker.objects.all():
-                ticker.generate_movement()
+            for ticker in await get_all_tickers():
+                await ticker.generate_movement()
                 adict[ticker.name] = ticker.value
-            self.send(text_data=json.dumps({'message': adict}))
-            time.sleep(1)
+            await self.send(text_data=json.dumps({'message': adict}))
+            await sleep(1)
