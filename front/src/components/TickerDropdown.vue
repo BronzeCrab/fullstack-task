@@ -30,4 +30,8 @@
   #ticker-sel {
     margin-left: 0.5rem;
   }
+  .ticker_drop {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 </style>
