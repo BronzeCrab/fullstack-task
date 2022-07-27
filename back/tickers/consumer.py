@@ -39,7 +39,7 @@ class Consumer(AsyncWebsocketConsumer):
                     history = await get_last_history_for_ticker(ticker)
                 adict[ticker.name] = [
                     history.value,
-                    history.created_at.strftime('%H:%M:%S:%f')[:-4],
+                    history.created_at.strftime('%H:%M:%S:%f')[:-5],
                 ]
             ind += 1
             await self.send(text_data=json.dumps({'message': adict}))

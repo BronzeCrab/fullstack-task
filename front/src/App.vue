@@ -42,6 +42,8 @@ export default {
       this.socket.onmessage = function(event) {
         let data = JSON.parse(event.data)
         if (data.message[ticker_name].length > 0) {
+          console.log(ticker_name)
+          console.log(data.message[ticker_name])
           _this.graphData.labels.push(data.message[ticker_name][1])
           _this.graphData.datasets[0].data.push(data.message[ticker_name][0])
         }
