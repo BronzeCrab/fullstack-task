@@ -2,10 +2,10 @@
 
 ### Бэкенд: 
 
-Использовал `Django`, `Channels`. 
+Использовал `Django`, `Channels`.
 Тикеры и истории по ним создаются в файле миграций 
-(`tickers/migrations/0001_initial.py`), сбрасывать значения тикеров можно
-из админки путем удаления объектов `TickerHistory`.
+(`tickers/migrations/0001_initial.py`), 
+сбрасывать значения тикеров можно из админки путем удаления объектов `TickerHistory`.
 
 Тесты лежат в `back/tickers/tests`.
 
