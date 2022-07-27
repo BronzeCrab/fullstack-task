@@ -11,13 +11,43 @@ def get_all_tickers():
     return list(Ticker.objects.all())
 
 
+@sync_to_async
+def get_history_for_ticker(ticker, ind):
+    try:
+        hist = list(ticker.tickerhistory_set.order_by('created_at').all())[ind]
+    except Exception:
+        return None
+    return hist
+
+
+@sync_to_async
+def get_last_history_for_ticker(ticker):
+    return ticker.tickerhistory_set.order_by('created_at').last()
+
+
 class Consumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
-        adict = {}
+        ind = 0
         while True:
+            adict = {}
             for ticker in await get_all_tickers():
-                await ticker.generate_movement()
-                adict[ticker.name] = ticker.value
-            await self.send(text_data=json.dumps({'message': adict}))
-            await sleep(1)
+                adict[ticker.name] = []
+                history = await get_history_for_ticker(ticker, ind)
+                if history:
+                    adict[ticker.name] = [
+                        history.value, str(history.created_at)]
+                else:
+                    await ticker.generate_movement()
+                    history = await get_last_history_for_ticker(ticker)
+                    adict[ticker.name] = [
+                        history.value, str(history.created_at)]
+            ind += 1
+            if ind == 1:
+                await self.send(text_data=json.dumps({'message': adict}))
+                await sleep(1)
+                await self.send(text_data=json.dumps({'message': adict}))
+                await sleep(1)
+            else:
+                await self.send(text_data=json.dumps({'message': adict}))
+                await sleep(1)

@@ -15,7 +15,7 @@
 
       let txt = ""
       for (let x in data.message) {
-        txt += x + ': ' + data.message[x] + " \n"
+        txt += x + ': ' + data.message[x][0]+ "; time=" + data.message[x][1] + " \n"
       }
 
       document.querySelector('#tickers').innerText = txt

@@ -41,10 +41,10 @@ export default {
       let _this = this
       this.socket.onmessage = function(event) {
         let data = JSON.parse(event.data)
-        _this.graphData.labels.push('test')
-        console.log(ticker_name)
-        console.log(data.message[ticker_name])
-        _this.graphData.datasets[0].data.push(data.message[ticker_name])
+        if (data.message[ticker_name].length > 0) {
+          _this.graphData.labels.push(data.message[ticker_name][1])
+          _this.graphData.datasets[0].data.push(data.message[ticker_name][0])
+        }
       }
     }
   },

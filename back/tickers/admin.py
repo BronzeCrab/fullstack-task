@@ -1,13 +1,15 @@
 from django.contrib import admin
 
-from tickers.models import Ticker
+from tickers.models import Ticker, TickerHistory
 
 
 @admin.register(Ticker)
 class TickerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'value')
+    list_display = ('id', 'name')
     actions = ['erase_values']
 
-    @admin.action(description='Erase all values of all tickers')
-    def erase_values(modeladmin, request, queryset):
-        queryset.update(value=0)
+
+@admin.register(TickerHistory)
+class TickerHistoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'ticker_id', 'value', 'created_at')
+    list_filter = ('ticker_id',)

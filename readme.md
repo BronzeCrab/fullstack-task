@@ -2,9 +2,9 @@
 
 ### Бэкенд: 
 
-Django, Channels, тикеры создаются в файле миграций 
+Django, Channels, тикеры и истории по ним создаются в файле миграций 
 (`tickers/migrations`), сбрасывать значения тикеров можно
-из админки (action 1`erase_values`).
+из админки путем удаления объектов `TickerHistory`.
 
 Тесты лежат в `back/tickers/tests`.
 
