@@ -31,6 +31,8 @@ Vue3, vue-charts
 
 `python manage.py migrate`
 
+`python manage.py createsuperuser`
+
 `python mangage.py runserver`
 
 потом:
