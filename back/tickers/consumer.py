@@ -42,11 +42,5 @@ class Consumer(AsyncWebsocketConsumer):
                     history.created_at.strftime('%H:%M:%S:%f')[:-4],
                 ]
             ind += 1
-            if ind == 1:
-                await self.send(text_data=json.dumps({'message': adict}))
-                await sleep(1)
-                await self.send(text_data=json.dumps({'message': adict}))
-                await sleep(1)
-            else:
-                await self.send(text_data=json.dumps({'message': adict}))
-                await sleep(1)
+            await self.send(text_data=json.dumps({'message': adict}))
+            await sleep(1)
