@@ -34,14 +34,13 @@ class Consumer(AsyncWebsocketConsumer):
             for ticker in await get_all_tickers():
                 adict[ticker.name] = []
                 history = await get_history_for_ticker(ticker, ind)
-                if history:
-                    adict[ticker.name] = [
-                        history.value, str(history.created_at)]
-                else:
+                if not history:
                     await ticker.generate_movement()
                     history = await get_last_history_for_ticker(ticker)
-                    adict[ticker.name] = [
-                        history.value, str(history.created_at)]
+                adict[ticker.name] = [
+                    history.value,
+                    history.created_at.strftime('%H:%M:%S:%f')[:-4],
+                ]
             ind += 1
             if ind == 1:
                 await self.send(text_data=json.dumps({'message': adict}))

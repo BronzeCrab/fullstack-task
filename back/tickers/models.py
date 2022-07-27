@@ -10,7 +10,10 @@ class Ticker(models.Model):
     def generate_movement(self):
         movement = -1 if random() < 0.5 else 1
         last_history = self.tickerhistory_set.order_by('created_at').last()
-        self.tickerhistory_set.create(value=last_history.value + movement)
+        if last_history:
+            self.tickerhistory_set.create(value=last_history.value + movement)
+        else:
+            self.tickerhistory_set.create(value=0)
 
     def __str__(self):
         return self.name
