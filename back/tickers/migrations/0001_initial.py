@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('value', models.IntegerField()),
-                ('created_at', models.TimeField(auto_now_add=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('ticker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tickers.ticker')),
             ],
         ),

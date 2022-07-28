@@ -20,11 +20,6 @@ def get_history_for_ticker(ticker, ind):
     return hist
 
 
-@sync_to_async
-def get_last_history_for_ticker(ticker):
-    return ticker.tickerhistory_set.order_by('created_at').last()
-
-
 class Consumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
@@ -35,8 +30,7 @@ class Consumer(AsyncWebsocketConsumer):
                 adict[ticker.name] = []
                 history = await get_history_for_ticker(ticker, ind)
                 if not history:
-                    await ticker.generate_movement()
-                    history = await get_last_history_for_ticker(ticker)
+                    history = await ticker.generate_movement_and_create_hist()
                 adict[ticker.name] = [
                     history.value,
                     history.created_at.strftime('%H:%M:%S:%f')[:-5],
